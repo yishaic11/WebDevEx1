@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Comment, { IComment } from "../models/comment";
 import { CreateCommentDto, UpdateCommentDto } from "../dtos/comment.dto";
+import Post from "../models/post";
 
 export const createComment = async (
   req: Request,
@@ -8,7 +9,9 @@ export const createComment = async (
 ): Promise<IComment> => {
   const newCommentData: CreateCommentDto = req.body;
   try {
-    // TODO: Check that post with provided postId exists
+    const post = await Post.findById(newCommentData.postId);
+    if (!post)
+      throw new Error(`Post not found for Id: ${newCommentData.postId}`);
 
     const comment = await Comment.create(newCommentData);
 
@@ -69,7 +72,8 @@ export const getCommentsByPostId = async (
 ): Promise<IComment[]> => {
   const postId = req.params.id;
   try {
-    // TODO: Check that post with provided postId exists
+    const post = await Post.findById(postId);
+    if (!post) throw new Error(`Post not found for Id: ${postId}`);
 
     const comments = await Comment.find({ postId });
 
