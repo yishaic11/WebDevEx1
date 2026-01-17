@@ -1,14 +1,11 @@
 {
-  "name": "back_a",
+  "name": "ex1",
   "version": "1.0.0",
-  "description": "",
   "main": "dist/app.js",
   "scripts": {
     "start": "tsc && node --env-file=.env dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Menachi",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "^2.2.1",
     "express": "^5.1.0",
