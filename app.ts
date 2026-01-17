@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import mongoose from "mongoose";
-import postRouter from "./routes/postRoutes";
+import postRouter from "./routes/posts";
 import bodyParser from "body-parser";
 
 const app: Application = express();
