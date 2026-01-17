@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import mongoose from "mongoose";
-import postRouter from "./routes/posts";
+import postsRouter from "./routes/posts";
 import bodyParser from "body-parser";
 
 const app: Application = express();
@@ -8,7 +8,7 @@ const port: number = parseInt(process.env.PORT || "3000");
 const databaseUrl: string = process.env.DATABASE_URL || "";
 
 app.use(bodyParser.json());
-app.use("/posts", postRouter);
+app.use("/posts", postsRouter);
 
 
 mongoose.connect(databaseUrl);
