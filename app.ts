@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import mongoose from "mongoose";
 import postsRouter from "./routes/posts";
+import commentsRouter from "./routes/comments";
 import bodyParser from "body-parser";
 
 const app: Application = express();
@@ -9,6 +10,7 @@ const databaseUrl: string = process.env.DATABASE_URL || "";
 
 app.use(bodyParser.json());
 app.use("/posts", postsRouter);
+app.use("/comments", commentsRouter)
 
 
 mongoose.connect(databaseUrl);

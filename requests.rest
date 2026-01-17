@@ -30,3 +30,36 @@ Content-Type: application/json
 {
   "content": "First updated post"
 }
+
+
+### Comment Tests
+
+### getAllComments
+GET http://localhost:3000/comments
+
+### getCommentsByPostId
+GET http://localhost:3000/comments/post/69623930d9a285a1c08063d5
+
+### getCommentById
+GET http://localhost:3000/comments/69622e79cf72cf44e040f25d
+
+### createComment
+POST http://localhost:3000/comments
+Content-Type: application/json
+
+{
+  "content": "First comment!",
+  "senderId": "12345",
+  "postId": "6962613434acfa9c7c2df560"
+}
+
+### deleteComment
+DELETE http://localhost:3000/comments/69622663434b9a432d12c16d
+
+### updateComment
+PUT http://localhost:3000/comments/6962619acb49e2eb5c55e47a
+Content-Type: application/json
+
+{
+  "content": "First updated comment!"
+}
