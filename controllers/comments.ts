@@ -34,12 +34,12 @@ export const getAllComments = async (
 
     res.json(comments);
     return comments;
-  } catch (err) {
+  } catch (error) {
     res.status(500).json({
       message: `Failed to get all comments`,
-      error: err instanceof Error ? err.message : String(err),
+      error: error instanceof Error ? error.message : String(error),
     });
-    throw err;
+    throw error;
   }
 };
 
@@ -124,11 +124,11 @@ export const deleteComment = async (
 
     res.send(deletedComment);
     return deletedComment;
-  } catch (err) {
+  } catch (error) {
     res.status(500).json({
       message: `Failed to delete comment with id: ${id}`,
-      error: err instanceof Error ? err.message : String(err),
+      error: error instanceof Error ? error.message : String(error),
     });
-    throw err;
+    throw error;
   }
 };
