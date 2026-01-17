@@ -10,9 +10,9 @@ import {
 
 const router: Router = Router();
 
-router.get("/", getAllPosts);
+router.get("/all", getAllPosts);
 router.get("/:id", getPostById);
-router.get("/sender/:id", getPostsBySenderId);
+router.get("/", getPostsBySenderId);
 router.post("/", createPost);
 router.delete("/:id", deletePost);
 router.put("/:id", updatePost);

@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import Post, { IPost } from "../models/post";
 import { CreatePostDto, UpdatePostDto } from "../dtos/post.dto";
+import Comment from "../models/comment";
 
 export const createPost = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<IPost> => {
   const newPostData: CreatePostDto = req.body;
 
@@ -24,7 +25,7 @@ export const createPost = async (
 
 export const getAllPosts = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<IPost[]> => {
   try {
     const posts = await Post.find();
@@ -42,7 +43,7 @@ export const getAllPosts = async (
 
 export const getPostById = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<IPost> => {
   const id = req.params.id;
 
@@ -63,9 +64,9 @@ export const getPostById = async (
 
 export const getPostsBySenderId = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<IPost[]> => {
-  const senderId = req.params.id;
+  const { sender: senderId } = req.query;
 
   try {
     const posts = await Post.find({ senderId });
@@ -83,7 +84,7 @@ export const getPostsBySenderId = async (
 
 export const updatePost = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<IPost> => {
   const id = req.params.id;
   const updatedPostData: UpdatePostDto = req.body;
@@ -107,12 +108,13 @@ export const updatePost = async (
 
 export const deletePost = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<IPost> => {
   const id = req.params.id;
 
   try {
-    // TODO: delete all connected comments
+    await Comment.deleteMany({ postId: id });
+
     const deletedPost = await Post.findByIdAndDelete(id);
     if (!deletedPost) throw new Error(`Post not found for id: ${id}`);
 
